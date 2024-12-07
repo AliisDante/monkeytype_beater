@@ -1,11 +1,12 @@
 from time import sleep
 
-from selenium.webdriver import Firefox
+from selenium.webdriver import Firefox, FirefoxService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-browser = Firefox(executable_path="./geckodriver")
+service = FirefoxService(executable_path="./geckodriver")
+browser = Firefox(service=service)
 
 def type_current_word(word_element, typing_element):
     letter_elements = word_element.find_elements(By.CSS_SELECTOR, "letter")
@@ -22,7 +23,7 @@ def type_current_word(word_element, typing_element):
 
     for i in letters:
         typing_element.send_keys(i)
-        # sleep(0.03)
+        sleep(0.03)
 
     return True
 
